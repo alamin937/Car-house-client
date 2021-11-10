@@ -1,0 +1,15 @@
+.banner{
+    background-image: url('https://images.unsplash.com/photo-1617531653520-4893f7bbf978?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1010&q=80');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 450px;
+}
+.banner h1{
+   display: inline-block;
+    color:white;
+    text-align: left;
+    margin-top: 40px;
+    font-size: 70px;
+    color:rgb(209, 187, 145);
+}

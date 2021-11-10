@@ -1,32 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Service from '../Service/Service';
 import { Container, Typography } from '@mui/material';
+import ShowCars from '../ShowCars/ShowCars';
 
-const Services = () => {
-    const [services, setServices] = useState([])
+const Cars = () => {
+    const [cars, setCars] = useState([])
 
     useEffect(() =>{
         fetch('http://localhost:5000/cars')
         .then(res => res.json())
-        .then(data => setServices(data.slice(1,7)))
+        .then(data => setCars(data))
     },[])
 
     return (
         <Container sx={{mt:5}}>
         <Box sx={{ flexGrow: 1 }}>
             <Typography sx={{mb:4, fontWeight:600}} variant='h4'>
-                CARS SERVICES
+               CAR HOUSE
+               <hr />
             </Typography>
+            
       <Grid container spacing={2}>
        {
-           services.map(service => <Service service={service}></Service>)
+           cars.map(car => <ShowCars car={car}></ShowCars>)
        }
       </Grid>
     </Box>
         </Container>
     );
 };
-
-export default Services;
+export default Cars;

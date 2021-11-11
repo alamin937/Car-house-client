@@ -6,12 +6,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -19,7 +13,6 @@ import { NavLink } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 import {
-    BrowserRouter,
     Switch,
     Route,
     useRouteMatch
@@ -28,6 +21,9 @@ import MyOrders from '../MyOrders/MyOrders';
 import Pay from '../Pay/Pay';
 import Review from '../Review/Review';
 import UseAuth from '../../../UseHooks/UseAuth';
+import AddAdmin from '../AddAdmin/AddAdmin';
+import ManageOrders from '../ManageOrders/ManageOrders';
+import AddProducts from '../AddProducts/AddProducts';
   
 
 const drawerWidth = 240;
@@ -35,7 +31,7 @@ const drawerWidth = 240;
 function DashBoard(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const {logOut} = UseAuth()
+  const {logOut, admin} = UseAuth();
 
   let { path, url } = useRouteMatch();
 
@@ -48,12 +44,17 @@ function DashBoard(props) {
       <Toolbar />
 
       <Divider />
-     <Box sx={{mt:5}}>
+     <Box style={{textAlign:'right', marginRight:'30px'}} sx={{mt:5}}>
       <NavLink style={{textDecoration:'none', color:''}} to='/explore'><Button color="inherit">Show Cars</Button></NavLink> <br />
       <NavLink style={{textDecoration:'none', color:''}} to={`${url}`}><Button color="inherit">My Order</Button></NavLink><br />
       <NavLink style={{textDecoration:'none', color:''}} to={`${url}/pay`}><Button color="inherit">Pay</Button></NavLink><br />
       <NavLink style={{textDecoration:'none', color:''}} to={`${url}/review`}><Button color="inherit">Review</Button></NavLink> <br />
-      <Button onClick={logOut}>Log Out</Button>
+      { admin && <Box>
+        <NavLink style={{textDecoration:'none', color:''}} to={`${url}/makeadmin`}><Button color="inherit">Make Admin</Button></NavLink> <br />
+      <NavLink style={{textDecoration:'none', color:''}} to={`${url}/manageorders`}><Button color="inherit">Manage Orders</Button></NavLink> <br />
+      <NavLink style={{textDecoration:'none', color:''}} to={`${url}/addproduct`}><Button color="inherit">Add Product</Button></NavLink>
+      </Box> }<br />
+      <Button variant='contained' onClick={logOut}>Log Out</Button>
      </Box>
     
     </div>
@@ -133,6 +134,15 @@ function DashBoard(props) {
         </Route>
         <Route path={`${path}/review`}>
           <Review />
+        </Route>
+        <Route path={`${path}/makeadmin`}>
+          <AddAdmin />
+        </Route>
+        <Route path={`${path}/manageorders`}>
+          <ManageOrders />
+        </Route>
+        <Route path={`${path}/addproduct`}>
+          <AddProducts />
         </Route>
       </Switch>
 

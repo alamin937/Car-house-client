@@ -7,7 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import UseAuth from '../../../UseHooks/UseAuth';
-import { Button } from '@mui/material';
+import ShowMyOrder from './ShowMyOrder';
 
 const MyOrders = () => {
     const [orders, setOrders] = useState([])
@@ -21,13 +21,13 @@ const MyOrders = () => {
     },[user.email])
 
 
-    const handleDelete = id =>{
-        const url = `https://aqueous-meadow-61451.herokuapp.com/placeorder?email=${id}`
-        fetch(url , {
-            method:'DELETE'
-        })
-        .then()
-    }
+    // const handleDelete = id =>{
+    //     const url = `https://aqueous-meadow-61451.herokuapp.com/placeorder?email=${id}`
+    //     fetch(url , {
+    //         method:'DELETE'
+    //     })
+    //     .then()
+    // }
   
 
 
@@ -38,7 +38,6 @@ const MyOrders = () => {
       <Table sx={{ minWidth: 550 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="right">Product Area</TableCell>
             <TableCell align="right">Name</TableCell>
             <TableCell align="right">Email</TableCell>
             <TableCell align="right">Phone</TableCell>
@@ -48,22 +47,9 @@ const MyOrders = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {orders.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.userName}</TableCell>
-              <TableCell align="right">{row.email}</TableCell>
-              <TableCell align="right">{row.phone}</TableCell>
-              <TableCell align="right">{row.address}</TableCell>
-              <TableCell align="right">{row.productName}</TableCell>
-              <TableCell align="right"> <Button onClick={() => handleDelete(user._id)}>Remove</Button> </TableCell>
-            </TableRow>
-          ))}
+          {
+            orders.map(order =>   <ShowMyOrder order={order}></ShowMyOrder>)
+          }
         </TableBody>
       </Table>
     </TableContainer>
@@ -71,3 +57,19 @@ const MyOrders = () => {
 };
 
 export default MyOrders;
+
+
+{/* <TableRow
+              key={row.name}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell align="right" component="th" scope="row">
+                {row.userName}
+              </TableCell>
+              <TableCell align="right">{row.email}</TableCell>
+              <TableCell align="right">{row.phone}</TableCell>
+              <TableCell align="right">{row.address}</TableCell>
+              <TableCell align="right">{row.productName}</TableCell>
+              <TableCell align="right"> <Button onClick={() => handleDelete(user._id)}>Remove</Button> </TableCell>
+              
+            </TableRow> */}

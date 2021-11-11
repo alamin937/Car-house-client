@@ -11,6 +11,7 @@ const UseHooks = () =>{
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState()
+    const [admin, setAdmin] = useState(false)
     const auth = getAuth();
 
 
@@ -20,9 +21,9 @@ const createUser = (email,password,name) =>{
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
         const newUser = {email, displayName:name}
+        saveUser(email, name)
         setError('')
         setUser(newUser)
-
         updateProfile(auth.currentUser, {
             displayName: name
           }).then(() => {
@@ -52,6 +53,13 @@ const loginUser = (email,password,history,location) =>{
   
 }
 
+useEffect(() => {
+  fetch(`http://localhost:5000/users/${user?.email}`)
+      .then(res => res.json())
+      .then(data => setAdmin(data.admin))
+}, [user?.email])
+
+
 
 
 useEffect(() =>{
@@ -64,6 +72,19 @@ useEffect(() =>{
         setLoading(false)
       })
 },[])
+
+
+const saveUser = (email, displayName) =>{
+    const user = {email, displayName}
+
+    fetch('http://localhost:5000/users', {
+      method:'POST',
+      headers:{
+        'content-type':'application/json'
+      },
+      body:JSON.stringify(user)
+    })
+}
 
 
 const logOut = () =>{
@@ -81,6 +102,7 @@ return{
     error,
     createUser,
     logOut,
+    admin,
     loginUser,
     loading
 }

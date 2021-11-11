@@ -14,7 +14,7 @@ const MyOrders = () => {
     const {user} = UseAuth();
 
     useEffect(() =>{
-        const url = `http://localhost:5000/placeorder?email=${user.email}`
+        const url = `https://aqueous-meadow-61451.herokuapp.com/placeorder?email=${user.email}`
         fetch(url)
         .then(res => res.json())
         .then(data => setOrders(data))
@@ -22,7 +22,7 @@ const MyOrders = () => {
 
 
     const handleDelete = id =>{
-        const url = `http://localhost:5000/placeorder?email=${id}`
+        const url = `https://aqueous-meadow-61451.herokuapp.com/placeorder?email=${id}`
         fetch(url , {
             method:'DELETE'
         })

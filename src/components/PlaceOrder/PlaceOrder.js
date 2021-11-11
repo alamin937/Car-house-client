@@ -21,7 +21,7 @@ const PlaceOrder = () => {
 
 
    useEffect(() =>{
-    const url = `http://localhost:5000/cars/${id}`
+    const url = `https://aqueous-meadow-61451.herokuapp.com/cars/${id}`
     fetch(url)
     .then(res => res.json())
     .then(data => setLoads(data))
@@ -31,7 +31,7 @@ const PlaceOrder = () => {
    const { register, handleSubmit, reset } = useForm();
    const onSubmit = data => {
     console.log(data)
-        fetch('http://localhost:5000/placeorder', {
+        fetch('https://aqueous-meadow-61451.herokuapp.com/placeorder', {
           method:'POST',
           headers:{
             'content-type': 'application/json'

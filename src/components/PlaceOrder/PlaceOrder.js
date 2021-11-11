@@ -3,7 +3,8 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { CardMedia, Container, TextField } from '@mui/material';
+import { useForm } from "react-hook-form";
+import { Alert, CardMedia, Container } from '@mui/material';
 
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -14,44 +15,40 @@ import { NavLink } from 'react-router-dom';
 
 const PlaceOrder = () => {
    const {user} = UseAuth();
+   const [successful, setSuccesful] = useState(false)
    const [loads, setLoads] = useState({})
    const {id} = useParams();
 
-   const initialize = {userName: user.displayName, email:user.email, phone:'', address:''}
-
-   const [places, setPlaces] = useState(initialize)
-
-
-   const placeBlur = e =>{
-     const field = e.target.field
-     const value = e.target.value
-     const newUser = {...places}
-     newUser[field] = value
-     console.log(newUser)
-     setPlaces(newUser)
-   }
-
-   const handlePlaces = e =>{
-
-    
-
-
-
-     e.preventDefault();
-   }
-
 
    useEffect(() =>{
-      const url = `http://localhost:5000/cars/${id}`
-      fetch(url)
-      .then(res => res.json())
-      .then(data => setLoads(data))
-   },[id])
+    const url = `http://localhost:5000/cars/${id}`
+    fetch(url)
+    .then(res => res.json())
+    .then(data => setLoads(data))
+ },[id])
 
 
-
-  
+   const { register, handleSubmit, reset } = useForm();
+   const onSubmit = data => {
+    console.log(data)
+        fetch('http://localhost:5000/placeorder', {
+          method:'POST',
+          headers:{
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(data => {
+          if(data.insertedId){
+            setSuccesful(true)
+            reset({ })
+          }
+        })
+   };
+    
     return (
+     <>
      <Container sx={{mt:5}}>
          <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
@@ -77,7 +74,33 @@ const PlaceOrder = () => {
     </Card>
         </Grid>
         <Grid item xs={12} md={6}>
-         <form onSubmit={handlePlaces}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+      <input defaultValue={user.displayName} style={{width:'50%', marginTop:'10px', padding:'5px'}} {...register("userName")} /> <br />
+      <input defaultValue={user.email} style={{width:'50%', marginTop:'10px', padding:'5px'}} {...register("email")} /> <br />
+      <input placeholder='Phone Number' style={{width:'50%', marginTop:'10px', padding:'5px'}} {...register("phone")} /> <br />
+      <input placeholder='Address' style={{width:'50%', marginTop:'10px', padding:'5px'}} {...register("address")} /> <br />
+      <input placeholder='Cars Name' style={{width:'50%', marginTop:'10px', padding:'5px'}} {...register("productName")} /> <br />
+      
+      <input style={{width:'53%', marginTop:'10px', padding:'10px',backgroundColor:'blue', border:'0', color:'white', fontWeight:'700'}} type="submit" />
+    </form>
+    {successful && <Alert severity="success">Successfully Added Product</Alert>}
+      <NavLink style={{textDecoration:'none'}} to='/home'><Button style={{width:'53%', marginTop:'10px'}} variant='contained'>Back Home</Button></NavLink>
+        </Grid>
+      </Grid>
+    </Box>
+     </Container>
+     
+     
+
+
+     </>
+    );
+};
+
+export default PlaceOrder;
+
+
+{/* <form onSubmit={handlePlaces}>
 <TextField style={{width:'60%', marginTop:'20px'}}
 id="outlined-size-small"
 name='userName'
@@ -119,16 +142,4 @@ size="small"
 />
 <br />
 <Button type='submit' style={{width:'60%', marginTop:'30px'}} variant='contained'>Place order</Button>
-</form>
-      <NavLink style={{textDecoration:'none'}} to='/home'><Button style={{width:'60%', marginTop:'30px'}} variant='contained'>Back Home</Button></NavLink>
-        </Grid>
-      
-      </Grid>
-    </Box>
-     </Container>
-    );
-};
-
-export default PlaceOrder;
-
-
+</form> */}

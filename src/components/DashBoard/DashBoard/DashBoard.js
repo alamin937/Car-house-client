@@ -48,22 +48,13 @@ function DashBoard(props) {
       <Toolbar />
 
       <Divider />
+     <Box sx={{mt:5}}>
       <NavLink style={{textDecoration:'none', color:''}} to='/explore'><Button color="inherit">Show Cars</Button></NavLink> <br />
-      {/* <NavLink style={{textDecoration:'none', color:''}} to={`${url}`}><Button color="inherit">My Order</Button></NavLink><br /> */}
+      <NavLink style={{textDecoration:'none', color:''}} to={`${url}`}><Button color="inherit">My Order</Button></NavLink><br />
       <NavLink style={{textDecoration:'none', color:''}} to={`${url}/pay`}><Button color="inherit">Pay</Button></NavLink><br />
       <NavLink style={{textDecoration:'none', color:''}} to={`${url}/review`}><Button color="inherit">Review</Button></NavLink> <br />
       <Button onClick={logOut}>Log Out</Button>
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
+     </Box>
     
     </div>
   );
@@ -134,9 +125,9 @@ function DashBoard(props) {
         <Toolbar />
        
         <Switch>
-        {/* <Route exact path={path}>
+        <Route exact path={path}>
           <MyOrders></MyOrders>
-        </Route> */}
+        </Route>
         <Route path={`${path}/pay`}>
           <Pay />
         </Route>

@@ -54,7 +54,7 @@ const loginUser = (email,password,history,location) =>{
 }
 
 useEffect(() => {
-  fetch(`http://localhost:5000/users/${user?.email}`)
+  fetch(`https://aqueous-meadow-61451.herokuapp.com/users/${user?.email}`)
       .then(res => res.json())
       .then(data => setAdmin(data.admin))
 }, [user?.email])
@@ -77,7 +77,7 @@ useEffect(() =>{
 const saveUser = (email, displayName) =>{
     const user = {email, displayName}
 
-    fetch('http://localhost:5000/users', {
+    fetch('https://aqueous-meadow-61451.herokuapp.com/users', {
       method:'POST',
       headers:{
         'content-type':'application/json'

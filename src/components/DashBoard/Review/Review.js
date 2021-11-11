@@ -6,7 +6,7 @@ const Review = () => {
     const { register, handleSubmit, reset } = useForm();
     const [succesfull, setSuccessful] = useState(false)
     const onSubmit = data => {
-        fetch('http://localhost:5000/review', {
+        fetch('https://aqueous-meadow-61451.herokuapp.com/review', {
             method:'post',
             headers:{
                 'content-type': 'application/json'

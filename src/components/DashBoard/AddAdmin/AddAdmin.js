@@ -30,9 +30,10 @@ const AddAdmin = () => {
     }
     return (
         <div>
-            <h1>make admin</h1>
+            <h1>Add Admin</h1>
+            <hr/>
             <form onSubmit={handleAdmin}>
-            <TextField 
+            <TextField style={{width:'30%'}}
             id="standard-basic" 
             label="Email"
             onBlur={handleEmail}

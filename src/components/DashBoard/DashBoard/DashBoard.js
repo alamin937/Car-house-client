@@ -40,19 +40,19 @@ function DashBoard(props) {
   };
 
   const drawer = (
-    <div>
+    <div style={{backgroundColor:'black', height:'100%'}}>
       <Toolbar />
 
       <Divider />
-     <Box style={{textAlign:'right', marginRight:'30px'}} sx={{mt:5}}>
-      <NavLink style={{textDecoration:'none', color:''}} to='/explore'><Button color="inherit">Show Cars</Button></NavLink> <br />
-      <NavLink style={{textDecoration:'none', color:''}} to={`${url}`}><Button color="inherit">My Order</Button></NavLink><br />
-      <NavLink style={{textDecoration:'none', color:''}} to={`${url}/pay`}><Button color="inherit">Pay</Button></NavLink><br />
-      <NavLink style={{textDecoration:'none', color:''}} to={`${url}/review`}><Button color="inherit">Review</Button></NavLink> <br />
+     <Box style={{textAlign:'right', marginRight:'30px', color:'white'}} sx={{mt:5}}>
+      <NavLink style={{textDecoration:'none', color:'white'}} to='/explore'><Button color="inherit">Show Cars</Button></NavLink> <br />
+      <NavLink style={{textDecoration:'none', color:'white'}} to={`${url}`}><Button color="inherit">My Order</Button></NavLink><br />
+      <NavLink style={{textDecoration:'none', color:'white'}} to={`${url}/pay`}><Button color="inherit">Pay</Button></NavLink><br />
+      <NavLink style={{textDecoration:'none', color:'white'}} to={`${url}/review`}><Button color="inherit">Review</Button></NavLink> <br />
       { admin && <Box>
-        <NavLink style={{textDecoration:'none', color:''}} to={`${url}/makeadmin`}><Button color="inherit">Make Admin</Button></NavLink> <br />
-      <NavLink style={{textDecoration:'none', color:''}} to={`${url}/manageorders`}><Button color="inherit">Manage Orders</Button></NavLink> <br />
-      <NavLink style={{textDecoration:'none', color:''}} to={`${url}/addproduct`}><Button color="inherit">Add Product</Button></NavLink>
+        <NavLink style={{textDecoration:'none', color:'white'}} to={`${url}/makeadmin`}><Button color="inherit">Make Admin</Button></NavLink> <br />
+      <NavLink style={{textDecoration:'none', color:'white'}} to={`${url}/manageorders`}><Button color="inherit">Manage All Orders</Button></NavLink> <br />
+      <NavLink style={{textDecoration:'none', color:'white'}} to={`${url}/addproduct`}><Button color="inherit">Add Product</Button></NavLink>
       </Box> }<br />
       <Button variant='contained' onClick={logOut}>Log Out</Button>
      </Box>
@@ -63,9 +63,10 @@ function DashBoard(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex' }}>
+   <div >
+      <Box  sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar
+      <AppBar style={{backgroundColor:'#667373'}}
         position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
@@ -87,7 +88,7 @@ function DashBoard(props) {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Box
+      <Box 
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
@@ -148,6 +149,7 @@ function DashBoard(props) {
 
       </Box>
     </Box>
+   </div>
   );
 }
 

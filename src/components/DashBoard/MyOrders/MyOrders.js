@@ -7,7 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import UseAuth from '../../../UseHooks/UseAuth';
-import ShowMyOrder from './ShowMyOrder';
+import { Button } from '@mui/material';
 
 const MyOrders = () => {
     const [orders, setOrders] = useState([])
@@ -20,15 +20,25 @@ const MyOrders = () => {
         .then(data => setOrders(data))
     },[user.email])
 
-
-    // const handleDelete = id =>{
-    //     const url = `https://aqueous-meadow-61451.herokuapp.com/placeorder?email=${id}`
-    //     fetch(url , {
-    //         method:'DELETE'
-    //     })
-    //     .then()
-    // }
   
+    const handleDelete = id =>{
+      const procced = window.confirm('Are You Sure You Want To Delete')
+      if(procced){
+       const url = `http://localhost:5000/placeorder/${id}`
+       fetch(url, {
+           method:'DELETE'
+       })
+       .then(res => res.json())
+       .then(data => {
+           if(data.deletedCount){
+               alert('Deleted Succesfully')
+               const remaining = orders.filter(order => order._id !== id)
+               setOrders(remaining)
+           }
+       })
+      }
+   }
+
 
 
 
@@ -36,30 +46,19 @@ const MyOrders = () => {
     return (
         <TableContainer component={Paper}>
       <Table sx={{ minWidth: 550 }} aria-label="simple table">
-        <TableHead>
+        <TableHead style={{backgroundColor:'blue'}}>
           <TableRow>
-            <TableCell align="right">Name</TableCell>
-            <TableCell align="right">Email</TableCell>
-            <TableCell align="right">Phone</TableCell>
-            <TableCell align="right">Address</TableCell>
-            <TableCell align="right">Product</TableCell>
-            <TableCell align="right">Action</TableCell>
+            <TableCell style={{color:'white'}} align="right">Name</TableCell>
+            <TableCell style={{color:'white'}} align="right">Email</TableCell>
+            <TableCell style={{color:'white'}} align="right">Phone</TableCell>
+            <TableCell style={{color:'white'}} align="right">Address</TableCell>
+            <TableCell style={{color:'white'}} align="right">Product</TableCell>
+            <TableCell style={{color:'white'}} align="right">Action</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {
-            orders.map(order =>   <ShowMyOrder order={order}></ShowMyOrder>)
-          }
-        </TableBody>
-      </Table>
-    </TableContainer>
-    );
-};
-
-export default MyOrders;
-
-
-{/* <TableRow
+        {orders.map((row) => (
+            <TableRow
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
@@ -70,6 +69,13 @@ export default MyOrders;
               <TableCell align="right">{row.phone}</TableCell>
               <TableCell align="right">{row.address}</TableCell>
               <TableCell align="right">{row.productName}</TableCell>
-              <TableCell align="right"> <Button onClick={() => handleDelete(user._id)}>Remove</Button> </TableCell>
-              
-            </TableRow> */}
+              <TableCell align="right"> <Button onClick={() => handleDelete(row._id)}>Remove</Button> </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    );
+};
+
+export default MyOrders;

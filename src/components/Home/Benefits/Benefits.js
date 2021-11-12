@@ -1,6 +1,5 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { Container, Typography } from '@mui/material';
 
@@ -29,7 +28,7 @@ const Benefits = () => {
                 We Provide Faster <br/> Booking
       </Typography>
       <Typography style={{textAlign:'justify'}} variant="body2" gutterBottom>
-      Find Car Dealer Us. Unlimited Access. 100% Secure. Always Facts. Privacy Friendly. The Best Resources. Results & Answers. Types: Best Results, Explore Now, New Sources, Best in Search.
+      Car Bookings information. 100% Privacy Protected! Find what you are looking for Here. 99% Match on Car Bookings. Only relevant search resultsClick here and Find. Discover us now! Easy Acces To Information. 
       </Typography>
       </Box>
           </Grid>

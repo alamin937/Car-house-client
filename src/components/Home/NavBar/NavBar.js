@@ -36,7 +36,7 @@ const NavBar = () => {
               
             </Box> :
             <NavLink style={{textDecoration:'none', color:'white'}} to='/login'><Button color="inherit">Login</Button></NavLink>}
-            
+            <span style={{color:'white', marginLeft:'20px', fontSize:'17px', fontWeight:'700'}}>{user?.displayName}</span>
           </Toolbar>
         </AppBar>
       </Box>

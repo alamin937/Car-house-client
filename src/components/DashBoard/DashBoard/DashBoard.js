@@ -24,6 +24,7 @@ import UseAuth from '../../../UseHooks/UseAuth';
 import AddAdmin from '../AddAdmin/AddAdmin';
 import ManageOrders from '../ManageOrders/ManageOrders';
 import AddProducts from '../AddProducts/AddProducts';
+import ManageProducts from '../ManageProducts/ManageProducts';
   
 
 const drawerWidth = 240;
@@ -53,6 +54,7 @@ function DashBoard(props) {
         <NavLink style={{textDecoration:'none', color:'white'}} to={`${url}/makeadmin`}><Button color="inherit">Make Admin</Button></NavLink> <br />
       <NavLink style={{textDecoration:'none', color:'white'}} to={`${url}/manageorders`}><Button color="inherit">Manage All Orders</Button></NavLink> <br />
       <NavLink style={{textDecoration:'none', color:'white'}} to={`${url}/addproduct`}><Button color="inherit">Add Product</Button></NavLink>
+      <NavLink style={{textDecoration:'none', color:'white'}} to={`${url}/manageproduct`}><Button color="inherit">Manage Product</Button></NavLink>
       </Box> }<br />
       <Button variant='contained' onClick={logOut}>Log Out</Button>
      </Box>
@@ -144,6 +146,9 @@ function DashBoard(props) {
         </Route>
         <Route path={`${path}/addproduct`}>
           <AddProducts />
+        </Route>
+        <Route path={`${path}/manageproduct`}>
+          <ManageProducts />
         </Route>
       </Switch>
 

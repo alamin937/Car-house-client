@@ -13,7 +13,7 @@ const ShowManageProducts = ({car, setCars,cars}) => {
     const handleDelete = id =>{
         const procced = window.confirm('Are You Sure')
         if(procced){
-            const url = `https://aqueous-meadow-61451.herokuapp.com/cars/${id}`
+            const url = `https://stark-woodland-28823.herokuapp.com/cars/${id}`
         fetch(url, {
             method:'DELETE'
         })

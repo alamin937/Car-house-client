@@ -24,7 +24,7 @@ const Review = () => {
 
     const onSubmit = data => {
         console.log(data)
-        fetch('https://aqueous-meadow-61451.herokuapp.com/review', {
+        fetch('https://stark-woodland-28823.herokuapp.com/review', {
             method:'post',
             headers:{
                 'content-type': 'application/json'

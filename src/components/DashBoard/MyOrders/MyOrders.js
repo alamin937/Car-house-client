@@ -14,7 +14,7 @@ const MyOrders = () => {
     const {user} = UseAuth();
 
     useEffect(() =>{
-        const url = `https://aqueous-meadow-61451.herokuapp.com/placeorder/${user.email}`
+        const url = `https://stark-woodland-28823.herokuapp.com/placeorder/${user.email}`
         fetch(url)
         .then(res => res.json())
         .then(data => setOrders(data))
@@ -24,7 +24,7 @@ const MyOrders = () => {
     const handleDelete = id =>{
       const procced = window.confirm('Are You Sure You Want To Delete')
       if(procced){
-       const url = `https://aqueous-meadow-61451.herokuapp.com/placeorder/${id}`
+       const url = `https://stark-woodland-28823.herokuapp.com/placeorder/${id}`
        fetch(url, {
            method:'DELETE'
        })

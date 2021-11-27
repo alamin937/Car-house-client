@@ -8,7 +8,7 @@ const AddProducts = () => {
     const [succesfull, setSuccessfull] = useState(false)
   const onSubmit = data => {
 
-    fetch('https://aqueous-meadow-61451.herokuapp.com/cars', {
+    fetch('https://stark-woodland-28823.herokuapp.com/cars', {
       method:'post',
       headers:{
         'content-type': 'application/json'
